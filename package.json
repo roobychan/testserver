@@ -1,0 +1,30 @@
+{
+    "name": "myServer",
+    "private": true,
+    "version": "0.0.0",
+    "description": "A tutorial application for AngularJS",
+    "devDependencies": {
+        "bower": "^1.7.7",
+        "http-server": "^0.11.1",
+        "jasmine-core": "^2.4.1",
+        "karma": "^3.1.1",
+        "karma-chrome-launcher": "^0.2.3",
+        "karma-firefox-launcher": "^0.1.7",
+        "karma-jasmine": "^0.3.8",
+        "protractor": "^5.4.1"
+    },
+    "scripts": {
+        "prestart": "npm install",
+        "start": "npm app.js",
+        "pretest": "npm install",
+        "test": "karma start karma.conf.js",
+        "test-single-run": "karma start karma.conf.js --single-run",
+        "preupdate-webdriver": "npm install",
+        "update-webdriver": "webdriver-manager update",
+        "preprotractor": "npm run update-webdriver",
+        "protractor": "protractor e2e-tests/protractor.conf.js"
+    },
+    "dependencies": {
+        "crossroads": "^0.12.2"
+    }
+}
