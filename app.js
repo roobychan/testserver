@@ -1,35 +1,26 @@
-const http = require('http');
-const crossroads = require('crossroads');
+'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+// const crossroads = require('crossroads');
+const app = express();
 
-const hostname = 'localhost';
+// const hostname = 'localhost';
 const port = 3000;
 
-crossroads.addRoute('/{type}/{action}', (request,response, type, action) => {
-	console.log(type,action);
-	const { headers, method, url } = request;
-	response.writeHead(200, {'Content-Type': 'application/json'});
-    // response.end(request.body);
-    let body = [];
-	request.on('data', (chunk) => {
-		body.push(chunk);
-	}).on('end', () => {
-		body = Buffer.concat(body).toString();
-		console.log(body);
-		// const responseBody = { headers, method, url, body };
-    	response.write(JSON.stringify({name:'test', crm:'2342342'}));
-    	response.end();
-	});
+// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
-
-const server = http.createServer((req, res) => {
-    // res.statusCode = 200;
-    // res.setHeader('Content-Type', 'text/html');
-    // res.end('hello world\n');
-    crossroads.parse(req.url,[req,res]);
-
+app.post('/userstory/create', (req, res) => {
+	res.json(req.body);
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+	console.log('server on 3000');
 });
