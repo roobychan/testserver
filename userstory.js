@@ -9,10 +9,13 @@ const PROJECTEU = '/project/193019226808';
 
 let taskTemplateOPS = require('./taskOPS.json');
 let taskTemplateDEV = require('./taskDEV.json');
+let apiKey = require('./apiKey.json');
 
-let restAPI = rally({
-	apiKey: '_b0ZewDOZThOpwqO4hbOi278k1JpeAE0tueYqgmzxIeY'
-});
+// let restAPI = rally({
+// 	apiKey: '_b0ZewDOZThOpwqO4hbOi278k1JpeAE0tueYqgmzxIeY'
+// });
+
+let restAPI = rally(apiKey);
 
 let db = new sqlite3.Database('./myRally.db', (err) => {
 	if (err) {
